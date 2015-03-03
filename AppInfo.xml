@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<AppInfo>
+  <Summary>Shows installed applications</Summary>
+  <About>
+    <Purpose>Shows installed applications</Purpose>
+    <Version>0.2.3</Version>
+    <Author>Dennis Tomas &lt;dtomas@users.berlios.de&gt;</Author>
+    <Homepage>http://rox4debian.berlios.de/0install/AppTray.xml</Homepage>
+  </About>
+</AppInfo>

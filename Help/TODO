@@ -1,0 +1,17 @@
+			AppTray
+			Shows installed applications
+			by Dennis Tomas
+
+TODO
+~~~~
+- react to adding/removing 0install interfaces
+/ show context menu for applications:
+	+ Help
+	+ Versions (only 0install)
+	/ Uninstall
+	- app options (only 0install)
+	- show/hide specific entries
+- menu to show/hide specific categories
+- changing category by dragging to different category icon
+- allow changing order of category icons
+- search tool

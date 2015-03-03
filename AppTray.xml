@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface uri="http://rox4debian.berlios.de/0install/AppTray.xml" xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+  <name>AppTray</name>
+  <summary>shows menus of installed applications</summary>
+  <description>
+AppTray is a panel applet that shows installed applications grouped by category.
+Each category is represented by an icon, which brings up a menu of applications
+belonging to this category when clicked.</description>
+  <category>System</category>
+  <feed-for interface="http://rox4debian.berlios.de/0install/AppTray.xml"/>
+  <icon href="ftp://ftp.berlios.de/pub/rox4debian/apps/AppTray.png" type="image/png"/>
+  <group arch="*-*" doc-dir="Help" license="OSI Approved :: GNU General Public License (GPL)" main="AppRun">
+    <implementation id='.' version="0.2.2" />
+ <requires 
+interface="http://rox.sourceforge.net/2005/interfaces/ROX-Lib">
+      <environment insert="ROX-Lib2/python" mode="prepend" 
+name="PYTHONPATH"/>
+    </requires>
+    <requires 
+interface="http://rox4debian.berlios.de/0install/TrayLib.xml">
+      <version not-before="0.4" before="0.5"/>
+      <environment insert="python" mode="prepend" name="PYTHONPATH"/>
+    </requires>
+    <requires 
+interface="http://0install.net/2007/interfaces/ZeroInstall.xml">
+        <environment insert="." mode="prepend" name="PYTHONPATH"/>
+      </requires>
+  </group>
+</interface>

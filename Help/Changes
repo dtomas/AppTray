@@ -1,0 +1,61 @@
+			AppTray
+			Shows installed applications
+			by Dennis Tomas
+
+0.2.3
+~~~~~
+- Now depending on TrayLib >= 0.4.
+
+0.2.2
+~~~~~
+- Include category icons for science and system settings.
+- Make AppTray work with zeroinstall >= 0.32.
+
+0.2.1
+~~~~~
+- Reposition menu after loading icons.
+- Make updating work again.
+- Fixed bug: Menu icons didn't appear in menus with new apps.
+- Ignore case when sorting menu items.
+
+Zero:
+- For ROX apps, add app options to the menu of the wrapper.
+- For ROX apps, get the mime types from the 'CanRun' element in AppInfo.xml.
+
+0.2
+~~~
+- Now depending on TrayLib 0.3.
+- Scale DND icon to size 48 if too large.
+- Show/hide category icons when left clicking main icon.
+- Removed Show/Hide menu item in main menu.
+- Use rox.tasks module to add apps in the background (speeds up startup).
+
+Xdg:
+- Check if "Type" option set to "Application".
+- Read mime types from "MimeType" option.
+
+0.1.2
+~~~~~
+- Added local feed.
+- Submenu "Help", "Versions", "Execute" for apps (via right-click menu).
+
+Xdg:
+- Don't show entries with "Hidden=true".
+- Determine doc-dir from name of desktop-file and xdg data dirs + 'doc'.
+
+Zero:
+- Use AddApp to show help.
+- Use '0launch -g' to show versions.
+
+0.1.1
+~~~~~
+- Use exec in app wrappers.
+
+Xdg:
+- Ignore apps_dirs that don't exist or aren't directories.
+- use GenericName as fallback for name/description
+
+
+0.1
+~~~
+Initial release

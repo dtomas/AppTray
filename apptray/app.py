@@ -1,7 +1,9 @@
 import gtk
 import apptray.categories
 from rox import processes
+
 from traylib import *
+from traylib.pixbuf_helper import scale_pixbuf_to_size
 
 default_icon_names = ['application-x-executable', 
                               'mime-application:x-executable', 
@@ -51,7 +53,9 @@ class App:
             self.__icon = default_icon
         else:
             try:
-                self.__icon = gtk.gdk.pixbuf_new_from_file(icon_path)
+                self.__icon = scale_pixbuf_to_size(
+                    gtk.gdk.pixbuf_new_from_file(icon_path), 48
+                )
             except:
                 self.__icon = default_icon
 

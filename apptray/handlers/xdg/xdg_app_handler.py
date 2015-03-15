@@ -9,8 +9,10 @@ from apptray.handlers.xdg.xdg_app import XdgApp, DesktopEntryNotShown
 
 class XdgAppHandler(AppHandler):
     
-    def __init__(self, tray):
-        self.__tray = tray
+    def __init__(self, app_added, app_removed):
+        self.__app_added = app_added
+        self.__app_removed = app_removed
+
         self.__apps_dirs = set()
         for datadir in XDG_DATA_DIRS:
             apps_dir = os.path.join(datadir, 'applications')
@@ -19,14 +21,13 @@ class XdgAppHandler(AppHandler):
             dir_monitor.add(apps_dir, self)
             self.__apps_dirs.add(apps_dir)
 
-    def add_apps(self):
+    def __iter__(self):
         self.__desktop_files = {}
         
         for apps_dir in self.__apps_dirs:
             if not os.path.isdir(apps_dir):
                 continue
             for leaf in os.listdir(apps_dir):
-                yield None
                 path = os.path.join(apps_dir, leaf)
                 if os.path.isdir(path):
                     continue
@@ -37,8 +38,9 @@ class XdgAppHandler(AppHandler):
                     app = XdgApp(self, app_path)
                 except DesktopEntryNotShown:
                     continue
-                self.__desktop_files[leaf] = app
-                self.__tray.add_app(app, False)
+                else:
+                    yield app
+                    self.__desktop_files[leaf] = app
 
     def file_created(self, dir, leaf):
         # try to create a new app
@@ -61,11 +63,11 @@ class XdgAppHandler(AppHandler):
                     return
             
             # remove the old app
-            self.__tray.remove_app(old_app)
+            self.__app_removed(old_app)
             old_app.destroy()
 
         # add the new app
-        self.__tray.add_app(new_app, not old_app)
+        self.__app_added(new_app, not old_app)
         
         self.__desktop_files[leaf] = new_app
 
@@ -90,7 +92,7 @@ class XdgAppHandler(AppHandler):
             except DesktopEntryNotShown:
                 continue
             # add the new app
-            category_icon = self.__tray.add_app(new_app)
+            category_icon = self.__app_added(new_app)
             self.__desktop_files[leaf] = new_app
 
     def uninstall(self, app):
@@ -107,8 +109,8 @@ class XdgAppHandler(AppHandler):
             processes.PipeThroughCommand(('dpkg', '--listfiles', package), None, s).wait()
             dpkg_list_str = s.getvalue()
             s.close()
-            for other_app in self.__tray.apps:
-                if other_app == app:
+            for other_app in self.__desktop_files.itervalues():
+                if other_app is app:
                     continue
                 if not isinstance(other_app, XdgApp):
                     continue

@@ -152,6 +152,9 @@ class XdgApp(App):
                 self.__doc_dir = doc_dir
                 break
 
+        self.__name = unicode(self.__name)
+        self.__description = unicode(self.__description)
+
         assert self.__command
         assert self.__name
         assert self.__category

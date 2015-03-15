@@ -2,6 +2,11 @@
 			Shows installed applications
 			by Dennis Tomas
 
+0.3.0 (unreleased)
+~~~~~
+- New application search dialog.
+- Install RunActions.
+
 0.2.3
 ~~~~~
 - Now depending on TrayLib >= 0.4.

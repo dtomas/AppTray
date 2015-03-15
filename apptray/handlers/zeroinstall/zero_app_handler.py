@@ -22,8 +22,9 @@ from zeroinstall.injector.reader import InvalidInterface
 
 class ZeroAppHandler(AppHandler):
     
-    def __init__(self, tray):
-        self.__tray = tray
+    def __init__(self, app_added, app_removed):
+        self.__app_added = app_added
+        self.__app_removed = app_removed
         dir_monitor.add(os.path.join(XDG_CACHE_HOME, '0install.net', 'interfaces'), self)
         
     def handle_uri(self, uri):
@@ -123,7 +124,7 @@ class ZeroAppHandler(AppHandler):
         if not os.path.exists(app_run):
             app_dir = None
         app = ZeroApp(self, interface, category_id, app_dir)
-        self.__tray.add_app(app, is_new)
+        self.__app_added(app, is_new)
         self.__apps[uri] = app
         if zeroinstall.version <= '0.31':
             policy.begin_icon_download(interface)
@@ -141,5 +142,5 @@ class ZeroAppHandler(AppHandler):
         app = self.__apps.get(uri)
         if not app:
             return
-        self.__tray.remove_app(app)
+        self.__app_removed(app)
         del self.__apps[uri]

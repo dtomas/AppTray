@@ -15,13 +15,17 @@ class MainIcon(MenuIcon):
         return True
     
     def make_tooltip(self):
+        parts = []
         if self.icon_config.hidden:
-            s = _("Click or scroll up to show application menus.\n")
+            parts.append(_("Scroll up to show application menus."))
         else:
-            s = _("Click or scroll down to hide the application menus.\n")
-        s += _("Drop a 0install-link to add an application.")
+            parts.append(_("Scroll down to hide the application menus."))
+        parts += [
+            _("Click to find an application."),
+            #_("Drop a 0install-link to add an application."),
+        ]
         #s += _("Right click will open the AppTray menu.")
-        return s
+        return '\n'.join(parts)
 
     def click(self, time):
         if self.__search_dialog is None:

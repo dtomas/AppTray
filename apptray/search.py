@@ -43,7 +43,6 @@ class AppSearchIndex(object):
             conditions.append('(name LIKE ? OR description LIKE ?)')
             args += (keyword, keyword)
         parts.append(' AND '.join(conditions))
-        print(' '.join(parts))
         c.execute(' '.join(parts), args)
         for result in c.fetchall():
             on_result(self.__apps[result[0]])
@@ -100,16 +99,7 @@ class AppSearchDialog(gtk.Window):
                     tray.remove_icon(app)
                 state.prev_results = results
 
-            #import cProfile, pstats
-            #profile = cProfile.Profile()
-            #profile.enable()
             self.__search_index.search(
                 entry.get_text().split(), on_result=on_result, on_finish=on_finish
             )
-            #from StringIO import StringIO
-            #s = StringIO()
-            #stats = pstats.Stats(profile, stream=s)
-            #stats.sort_stats('tottime')
-            #stats.print_stats()
-            #print(s.getvalue())
         self.__search_entry.connect("changed", text_changed)

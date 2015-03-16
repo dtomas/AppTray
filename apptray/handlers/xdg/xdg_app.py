@@ -74,17 +74,23 @@ class XdgApp(App):
         except NoOptionError:
             pass
 
-        try:
-            if 'ROX' not in parser.get(SECTION_DESKTOP_ENTRY, "OnlyShowIn").split(';'):
-                raise DesktopEntryNotShown()
-        except NoOptionError:
-            pass
+        desktop_session = os.getenv('DESKTOP_SESSION')
 
-        try:
-            if 'ROX' in parser.get(SECTION_DESKTOP_ENTRY, "NotShowIn").split(';'):
-                raise DesktopEntryNotShown()
-        except NoOptionError:
-            pass
+        if desktop_session:
+            try:
+                only_show_in = parser.get(SECTION_DESKTOP_ENTRY, "OnlyShowIn")
+            except NoOptionError:
+                pass
+            else:
+                if desktop_session not in only_show_in.split(';'):
+                    raise DesktopEntryNotShown()
+            try:
+                not_show_in = parser.get(SECTION_DESKTOP_ENTRY, "NotShowIn")
+            except NoOptionError:
+                pass
+            else:
+                if desktop_session in not_show_in.split(';'):
+                    raise DesktopEntryNotShown()
 
         self.__command = ['rox', self.__path]
 

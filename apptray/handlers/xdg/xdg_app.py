@@ -1,7 +1,11 @@
-import gtk, os
-from rox import i18n
+import re
+import os
 from ConfigParser import RawConfigParser, NoOptionError
+
+import gtk
+from rox import i18n
 from traylib import *
+
 from apptray import categories
 from apptray.app import App
 
@@ -92,7 +96,12 @@ class XdgApp(App):
                 if desktop_session in not_show_in.split(';'):
                     raise DesktopEntryNotShown()
 
-        self.__command = ['rox', self.__path]
+        try:
+            self.__exe = parser.get(SECTION_DESKTOP_ENTRY, "Exec")
+        except NoOptionError:
+            raise DesktopEntryNotShown()
+
+        self.__command = re.sub('%[FfuUdDnNickvm]', '', self.__exe).split()
 
         self.__description = None
         for lang in languages:
@@ -208,4 +217,5 @@ class XdgApp(App):
     def get_mime_types(self):
         return self.__mime_types
 
+    exe = property(lambda self : self.__exe)
     path = property(lambda self : self.__path)

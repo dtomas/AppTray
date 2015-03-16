@@ -1,5 +1,6 @@
-import gtk
 import sqlite3
+
+import gtk
 
 from apptray.appicon import AppIcon
 
@@ -12,17 +13,20 @@ class AppSearchIndex(object):
         self.__conn.execute(
             'CREATE TABLE apps '
                 '(hash INTEGER PRIMARY KEY, '
-                'name VARCHAR(16), description VARCHAR(64))'
+                'name VARCHAR(16), '
+                'command VARCHAR(16), '
+                'description VARCHAR(64))'
         )
         self.__conn.execute('CREATE INDEX name_index ON apps (name)')
+        self.__conn.execute('CREATE INDEX command_index ON apps (command)')
         self.__conn.execute(
             'CREATE INDEX description_index ON apps (description)'
         )
 
     def add_app(self, app):
         self.__conn.execute(
-            'INSERT INTO apps VALUES (?, ?, ?)',
-            (hash(app), app.name, app.description)
+            'INSERT INTO apps VALUES (?, ?, ?, ?)',
+            (hash(app), app.name, ' '.join(app.command), app.description)
         )
         self.__apps[hash(app)] = app
 
@@ -40,8 +44,10 @@ class AppSearchIndex(object):
         args = ()
         for keyword in keywords:
             keyword = '%%%s%%' % keyword
-            conditions.append('(name LIKE ? OR description LIKE ?)')
-            args += (keyword, keyword)
+            conditions.append(
+                '(name LIKE ? OR command LIKE ? OR description LIKE ?)'
+            )
+            args += (keyword, keyword, keyword)
         parts.append(' AND '.join(conditions))
         c.execute(' '.join(parts), args)
         for result in c.fetchall():

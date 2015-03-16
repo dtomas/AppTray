@@ -1,7 +1,7 @@
 
 class AppHandler:
     
-    def add_apps(self):
+    def __iter__(self):
         raise NotImplementedError
 
     def handle_uri(self, uri):

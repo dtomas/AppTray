@@ -33,10 +33,8 @@ class AppTray(Tray):
 
     def __init__(self, icon_config, tray_config):
         Tray.__init__(self, icon_config, tray_config, MainIcon)
-        
-        self.__apps = set()
 
-        self.add_box("search-result")
+        self.__apps = set()
 
         self.add_box("Categories")
 
@@ -66,6 +64,13 @@ class AppTray(Tray):
         #self.add_icon("Actions", "MainIcon", MainIcon(self))
         
         self.update()
+
+    def update_option_menus(self):
+        Tray.update_option_menus(self)
+        print("update_option_menus")
+        if self.has_box("search-result"):
+            self.remove_box("search-result")
+        self.add_box("search-result", side=self.tray_config.menus)
 
     def get_custom_menu_items(self):
         menu_item = gtk.ImageMenuItem(gtk.STOCK_REFRESH)

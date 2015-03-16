@@ -56,10 +56,12 @@ class XdgAppHandler(AppHandler):
             old_app_datadir = os.path.dirname(os.path.dirname(old_app.path))
             for datadir in XDG_DATA_DIRS:
                 if datadir == new_app_datadir:
-                    # the datadir of the new app overrules the one of the old one, so go on
+                    # the datadir of the new app overrules the one
+                    # of the old one, so go on
                     break
                 if datadir == old_app_datadir:
-                    # the datadir of the old app overrules the one of the new one, so exit
+                    # the datadir of the old app overrules the one
+                    # of the new one, so exit
                     return
             
             # remove the old app
@@ -97,7 +99,9 @@ class XdgAppHandler(AppHandler):
 
     def uninstall(self, app):
         s = StringIO()
-        processes.PipeThroughCommand(('dpkg', '--search', app.path), None, s).wait()
+        processes.PipeThroughCommand(
+            ('dpkg', '--search', app.path), None, s
+        ).wait()
         dpkg_search_str = s.getvalue()
         s.close()
         if not dpkg_search_str:
@@ -106,7 +110,9 @@ class XdgAppHandler(AppHandler):
         other_apps = set()
         for package in packages:
             s = StringIO()
-            processes.PipeThroughCommand(('dpkg', '--listfiles', package), None, s).wait()
+            processes.PipeThroughCommand(
+                ('dpkg', '--listfiles', package), None, s
+            ).wait()
             dpkg_list_str = s.getvalue()
             s.close()
             for other_app in self.__desktop_files.itervalues():

@@ -11,7 +11,9 @@ class SendToHandler:
             if not mime_type or not mime_type.strip(' '):
                 continue
             try:
-                self.__sendto_items.setdefault(app, []).append(SendToItem(app, mime_type))
+                self.__sendto_items.setdefault(app, []).append(
+                    SendToItem(app, mime_type)
+                )
             except SendToItemNotCreated:
                 pass
 

@@ -1,20 +1,46 @@
 from apptray.category import Category
 
-CATEGORY_NETWORK = Category(10, "Network", _("Network"), ['applications-internet'])
-CATEGORY_OFFICE = Category(20, "Office", _("Office"), ['applications-office'])
-CATEGORY_AUDIOVIDEO = Category(30, "AudioVideo", _("Multimedia"), ['applications-multimedia'])
+CATEGORY_NETWORK = Category(
+    10, "Network", _("Network"), ['applications-internet']
+)
+CATEGORY_OFFICE = Category(
+    20, "Office", _("Office"), ['applications-office']
+)
+CATEGORY_AUDIOVIDEO = Category(
+    30, "AudioVideo", _("Multimedia"), ['applications-multimedia']
+)
 #CATEGORY_AUDIO = Category("Audio", _("Audio"), _("Audio"))
 #CATEGORY_VIDEO = Category("Video", _("Video"), _("Video"))
-CATEGORY_GRAPHICS = Category(40, "Graphics", _("Graphics"), ['applications-graphics'])
-CATEGORY_DEVELOPMENT = Category(60, "Development", _("Development"), ['applications-development'])
-CATEGORY_SCIENCE = Category(80, "Science", _("Science"), ['applications-science'])
-CATEGORY_GAME = Category(70, "Game", _("Games"), ['applications-games'])
-CATEGORY_UTILITY = Category(50, "Utility", _("Utilities"), ['applications-accessories'])
-CATEGORY_UNKNOWN = Category(90, "Unknown", _("Other"), ['applications-other'])
-CATEGORY_SETTINGS_DESKTOP = Category(110, "Settings", _("Desktop Settings"), ['preferences-desktop'])
-CATEGORY_SETTINGS_SYSTEM = Category(110, "SystemSettings", _("System Settings"), ['preferences-system'])
-CATEGORY_SYSTEM = Category(100, "System", _("System"), ['applications-system'])
-CATEGORY_APPLETS = Category(120, "ROX-Applets", _("Applets"), ['applications-other'])
+CATEGORY_GRAPHICS = Category(
+    40, "Graphics", _("Graphics"), ['applications-graphics']
+)
+CATEGORY_DEVELOPMENT = Category(
+    60, "Development", _("Development"), ['applications-development']
+)
+CATEGORY_SCIENCE = Category(
+    80, "Science", _("Science"), ['applications-science']
+)
+CATEGORY_GAME = Category(
+    70, "Game", _("Games"), ['applications-games']
+)
+CATEGORY_UTILITY = Category(
+    50, "Utility", _("Utilities"), ['applications-accessories']
+)
+CATEGORY_UNKNOWN = Category(
+    90, "Unknown", _("Other"), ['applications-other']
+)
+CATEGORY_SETTINGS_DESKTOP = Category(
+    110, "Settings", _("Desktop Settings"), ['preferences-desktop']
+)
+CATEGORY_SETTINGS_SYSTEM = Category(
+    110, "SystemSettings", _("System Settings"), ['preferences-system']
+)
+CATEGORY_SYSTEM = Category(
+    100, "System", _("System"), ['applications-system']
+)
+CATEGORY_APPLETS = Category(
+    120, "ROX-Applets", _("Applets"), ['applications-other']
+)
 
 # subcategories:
 # Viewer -> Graphics

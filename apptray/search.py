@@ -106,6 +106,7 @@ class AppSearchDialog(gtk.Window):
                 state.prev_results = results
 
             self.__search_index.search(
-                entry.get_text().split(), on_result=on_result, on_finish=on_finish
+                entry.get_text().split(),
+                on_result=on_result, on_finish=on_finish
             )
         self.__search_entry.connect("changed", text_changed)

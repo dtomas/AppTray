@@ -40,10 +40,13 @@ class AppMenuItem(gtk.ImageMenuItem):
         
     def update_icon(self):
         if self.__app.icon:
-            pixbuf = scale_pixbuf_to_size(self.__app.icon, self.__icon_size, scale_up = True)
+            pixbuf = scale_pixbuf_to_size(
+                self.__app.icon, self.__icon_size, scale_up = True
+            )
             self.get_image().set_from_pixbuf(pixbuf)
 
-    def __drag_data_get(self, widget, drag_context, selection_data, info, timestamp):
+    def __drag_data_get(self, widget, drag_context, selection_data, info,
+                        timestamp):
         selection_data.set_uris(['file://' + self.__app.dnd_path])
 
     def __drag_begin(self, widget, drag_context):

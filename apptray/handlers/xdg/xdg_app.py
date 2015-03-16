@@ -44,7 +44,9 @@ class XdgApp(App):
         self.__name = None
         for lang in languages:
             try:
-                self.__name = parser.get(SECTION_DESKTOP_ENTRY, "Name[%s]" % lang)
+                self.__name = parser.get(
+                    SECTION_DESKTOP_ENTRY, "Name[%s]" % lang
+                )
                 break
             except NoOptionError:
                 pass
@@ -56,7 +58,9 @@ class XdgApp(App):
         if not self.__name:
             for lang in languages:
                 try:
-                    self.__name = parser.get(SECTION_DESKTOP_ENTRY, "GenericName[%s]" % lang)
+                    self.__name = parser.get(
+                        SECTION_DESKTOP_ENTRY, "GenericName[%s]" % lang
+                    )
                     break
                 except NoOptionError:
                     pass
@@ -106,39 +110,51 @@ class XdgApp(App):
         self.__description = None
         for lang in languages:
             try:
-                self.__description = parser.get(SECTION_DESKTOP_ENTRY, "Comment[%s]" % lang)
+                self.__description = parser.get(
+                    SECTION_DESKTOP_ENTRY, "Comment[%s]" % lang
+                )
                 break
             except NoOptionError:
                 pass
         if not self.__description:
             try:
-                self.__description = parser.get(SECTION_DESKTOP_ENTRY, "Comment")
+                self.__description = parser.get(
+                    SECTION_DESKTOP_ENTRY, "Comment"
+                )
             except NoOptionError:
                 pass
         if not self.__description:
             for lang in languages:
                 try:
-                    self.__description = parser.get(SECTION_DESKTOP_ENTRY, "GenericName[%s]" % lang)
+                    self.__description = parser.get(
+                        SECTION_DESKTOP_ENTRY, "GenericName[%s]" % lang
+                    )
                     break
                 except NoOptionError:
                     pass
         if not self.__description:
             try:
-                self.__description = parser.get(SECTION_DESKTOP_ENTRY, "GenericName")
+                self.__description = parser.get(
+                    SECTION_DESKTOP_ENTRY, "GenericName"
+                )
             except NoOptionError:
                 raise DesktopEntryNotShown()
         if not self.__description:
             self.__description = self.__name
 
         try:
-            self.__icon_name_or_path = parser.get(SECTION_DESKTOP_ENTRY, "Icon")
+            self.__icon_name_or_path = parser.get(
+                SECTION_DESKTOP_ENTRY, "Icon"
+            )
             
             # fix for .desktop files containing an icon name with extension
             if not os.path.isabs(self.__icon_name_or_path):
                 if (self.__icon_name_or_path.endswith('.png') 
                         or self.__icon_name_or_path.endswith('.svg')
                         or self.__icon_name_or_path.endswith('.xpm')):
-                    self.__icon_name_or_path = self.__icon_name_or_path[:len(self.__icon_name_or_path)-4]
+                    self.__icon_name_or_path = self.__icon_name_or_path[
+                        :len(self.__icon_name_or_path)-4
+                    ]
         except NoOptionError:
             self.__icon_name_or_path = ''
 
@@ -155,8 +171,9 @@ class XdgApp(App):
         except NoOptionError:
             self.__mime_types = ()
 
-        self.__icon_theme_changed_handler = ICON_THEME.connect("changed", 
-                                                               self.__icon_theme_changed)
+        self.__icon_theme_changed_handler = ICON_THEME.connect(
+            "changed", self.__icon_theme_changed
+        )
 
         app_name = os.path.basename(path)
         app_name = app_name[0:len(app_name)-8]

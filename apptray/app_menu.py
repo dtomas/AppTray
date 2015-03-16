@@ -32,6 +32,7 @@ class AppMenu(gtk.Menu):
         processes.PipeThroughCommand(command, None, None).start()
 
     def __uninstall(self, menu_item):
-        if rox.confirm(_("Really delete the application \"%s\"?" % self.__app.name), 
-                       gtk.STOCK_DELETE):
+        if rox.confirm(
+                _("Really delete the application \"%s\"?" % self.__app.name), 
+                gtk.STOCK_DELETE):
             self.__app.handler.uninstall(self.__app)

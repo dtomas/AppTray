@@ -4,6 +4,7 @@
 
 0.3.0 (unreleased)
 ~~~~~
+- Add support for ROX app dirs.
 - New application search dialog.
 - Install RunActions.
 

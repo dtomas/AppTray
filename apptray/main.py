@@ -39,7 +39,7 @@ class AppTray(Tray):
         self.add_box("Categories")
 
         self.__search_index = AppSearchIndex()
-        self.__sendto_handler = SendToHandler()
+        #self.__sendto_handler = SendToHandler()
 
         self.__handlers = set()
 
@@ -67,7 +67,6 @@ class AppTray(Tray):
 
     def update_option_menus(self):
         Tray.update_option_menus(self)
-        print("update_option_menus")
         if self.has_box("search-result"):
             self.remove_box("search-result")
         self.add_box("search-result", side=self.tray_config.menus)
@@ -87,13 +86,13 @@ class AppTray(Tray):
     def add_app(self, app, is_new = True):
         self.get_icon(app.category).add_app(app, is_new)
         self.__search_index.add_app(app)
-        self.__sendto_handler.app_added(app)
+        #self.__sendto_handler.app_added(app)
         self.__apps.add(app)
 
     def remove_app(self, app):
         self.get_icon(app.category).remove_app(app)
         self.__search_index.remove_app(app)
-        self.__sendto_handler.app_removed(app)
+        #self.__sendto_handler.app_removed(app)
         self.__apps.remove(app)
 
     def update(self):

@@ -5,9 +5,13 @@ from rox import processes
 from traylib import *
 from traylib.pixbuf_helper import scale_pixbuf_to_size
 
-default_icon_names = ['application-x-executable', 
-                              'mime-application:x-executable', 
-                              'gnome-mime-application-x-executable']
+
+default_icon_names = [
+    'application-x-executable', 
+    'mime-application:x-executable', 
+    'gnome-mime-application-x-executable'
+]
+
 
 for icon_name in default_icon_names:
     icon_info = ICON_THEME.lookup_icon(icon_name, 22, 0)

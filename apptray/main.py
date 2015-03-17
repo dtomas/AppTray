@@ -14,9 +14,10 @@ from apptray.sendto_handler import SendToHandler
 from apptray.search import AppSearchIndex
 
 from apptray.handlers.xdg.xdg_app_handler import XdgAppHandler
+from apptray.handlers.rox.rox_app_handler import RoxAppHandler
 
 
-_handler_classes = [XdgAppHandler]
+_handler_classes = [XdgAppHandler, RoxAppHandler]
 
 
 # Commented out for now, as it does not work with recent 0install API.

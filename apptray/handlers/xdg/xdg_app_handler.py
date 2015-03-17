@@ -13,13 +13,13 @@ class XdgAppHandler(AppHandler):
         self.__app_added = app_added
         self.__app_removed = app_removed
 
-        self.__apps_dirs = set()
+        self.__apps_dirs = []
         for datadir in XDG_DATA_DIRS:
             apps_dir = os.path.join(datadir, 'applications')
             if not os.path.isdir(apps_dir):
                 continue
             dir_monitor.add(apps_dir, self)
-            self.__apps_dirs.add(apps_dir)
+            self.__apps_dirs.append(apps_dir)
 
     def __iter__(self):
         self.__desktop_files = {}

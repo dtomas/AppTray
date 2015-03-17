@@ -19,7 +19,7 @@ class AppMenuIcon(Icon):
         self.__menu_right = None
         self.__new_apps = set()
 
-    def icon_theme_changed(self, theme):
+    def icon_theme_changed(self):
         self.__menu = None
         self.__menu_right = None
 

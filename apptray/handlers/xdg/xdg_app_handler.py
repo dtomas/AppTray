@@ -1,8 +1,7 @@
 import os
-from rox import processes
+from rox import processes, file_monitor
 from cStringIO import StringIO
 from traylib import XDG_DATA_DIRS
-from traylib import dir_monitor
 from apptray.app_handler import AppHandler
 from apptray.handlers.xdg.xdg_app import XdgApp, DesktopEntryNotShown
 
@@ -14,11 +13,15 @@ class XdgAppHandler(AppHandler):
         self.__app_removed = app_removed
 
         self.__apps_dirs = []
+
+        if not file_monitor.is_available():
+            return
+
         for datadir in XDG_DATA_DIRS:
             apps_dir = os.path.join(datadir, 'applications')
             if not os.path.isdir(apps_dir):
                 continue
-            dir_monitor.add(apps_dir, self)
+            file_monitor.watch(apps_dir, self.file_created, self.file_deleted)
             self.__apps_dirs.append(apps_dir)
 
     def __iter__(self):

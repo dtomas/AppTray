@@ -1,6 +1,8 @@
 import os
 
-from traylib import APPDIRPATH, dir_monitor
+from traylib import APPDIRPATH
+
+from rox import file_monitor
 
 from apptray.app_handler import AppHandler
 from apptray.handlers.rox.rox_app import RoxApp, NotAnAppDir
@@ -15,7 +17,7 @@ class RoxAppHandler(AppHandler):
         self.__apps = {}
 
     def _monitor_apps_dir(self, apps_dir):
-        dir_monitor.add(apps_dir, self)
+        file_monitor.watch(apps_dir, self.file_created, self.file_deleted)
         # FIXME: Wanna watch subdirectories, but this makes the dir monitor hang
         # when there are many of them. Is this some gamin/inotify limitation?
         #for dirname in os.listdir(apps_dir):
@@ -48,6 +50,9 @@ class RoxAppHandler(AppHandler):
             for app in self._get_apps(apps_dir):
                 yield app
 
+        if not file_monitor.is_available():
+            return
+
         for apps_dir in APPDIRPATH:
             if not os.path.isdir(apps_dir):
                 continue
@@ -60,7 +65,7 @@ class RoxAppHandler(AppHandler):
         try:
             app = RoxApp(self, path)
         except NotAnAppDir:
-            dir_monitor.add(path, self)
+            file_monitor.watch(path, self.file_created, self.file_deleted)
         else:
             self.__apps[path] = app
             self.__app_added(app)

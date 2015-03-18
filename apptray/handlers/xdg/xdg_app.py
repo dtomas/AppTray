@@ -3,7 +3,10 @@ import os
 from ConfigParser import RawConfigParser, NoOptionError
 
 import gtk
+
 from rox import i18n
+from rox.basedir import xdg_data_dirs
+
 from traylib import *
 
 from apptray import categories
@@ -178,7 +181,7 @@ class XdgApp(App):
         app_name = os.path.basename(path)
         app_name = app_name[0:len(app_name)-8]
         self.__doc_dir = None
-        for data_dir in XDG_DATA_DIRS:
+        for data_dir in xdg_data_dirs:
             doc_dir = os.path.join(data_dir, 'doc', app_name)
             if os.path.isdir(doc_dir):
                 self.__doc_dir = doc_dir

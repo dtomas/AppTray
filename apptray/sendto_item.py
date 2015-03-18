@@ -1,10 +1,10 @@
 import os
 
-from traylib import XDG_CONFIG_HOME
+from rox.basedir import xdg_config_home
 
-_sendto_dir = os.path.join(XDG_CONFIG_HOME, 'rox.sourceforge.net', 'SendTo')
+_sendto_dir = os.path.join(xdg_config_home, 'rox.sourceforge.net', 'SendTo')
 _runactions_dir = os.path.join(
-    XDG_CONFIG_HOME, 'rox.sourceforge.net', 'MIME-types'
+    xdg_config_home, 'rox.sourceforge.net', 'MIME-types'
 )
 
 if not os.path.exists(_sendto_dir):

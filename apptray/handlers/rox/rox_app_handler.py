@@ -42,6 +42,9 @@ class RoxAppHandler(AppHandler):
             else:
                 self.__apps[app_path] = app
                 yield app
+                file_monitor.watch(
+                    app_path, self.file_created, self.file_deleted
+                )
 
     def __iter__(self):
         for apps_dir in APPDIRPATH:
@@ -60,21 +63,30 @@ class RoxAppHandler(AppHandler):
 
     def file_created(self, dir, leaf):
         path = os.path.join(dir, leaf)
-        if not os.path.isdir(path):
+        if leaf == 'AppRun':
+            if os.access(path, os.X_OK):
+                # A regular dir is turned into an app dir.
+                path = dir
+        elif not os.path.isdir(path):
             return
         try:
             app = RoxApp(self, path)
         except NotAnAppDir:
-            file_monitor.watch(path, self.file_created, self.file_deleted)
+            pass
         else:
             self.__apps[path] = app
             self.__app_added(app)
+        file_monitor.watch(path, self.file_created, self.file_deleted)
 
     def file_deleted(self, dir, leaf):
         path = os.path.join(dir, leaf)
+        if leaf == 'AppRun':
+            # An app dir is turned into a regular dir.
+            path = dir
+        elif not os.path.isdir(path):
+            return
         try:
             app = self.__apps[path]
         except KeyError:
             return
-        print(app)
         self.__app_removed(app)

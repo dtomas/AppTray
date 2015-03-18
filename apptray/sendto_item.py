@@ -1,4 +1,5 @@
 import os
+
 from traylib import XDG_CONFIG_HOME
 
 _sendto_dir = os.path.join(XDG_CONFIG_HOME, 'rox.sourceforge.net', 'SendTo')

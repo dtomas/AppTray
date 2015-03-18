@@ -1,7 +1,7 @@
-import sys, os, rox
-from rox.tasks import Task
 from itertools import ifilter, imap
 from operator import attrgetter
+
+from rox.tasks import Task
 
 from traylib import *
 from traylib.tray import Tray, TrayConfig

@@ -1,7 +1,10 @@
 import gtk
+
 from rox.tasks import Task
+
 from traylib import *
 from traylib.pixbuf_helper import *
+
 from apptray.app_menu import AppMenu
 
 

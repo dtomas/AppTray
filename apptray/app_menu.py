@@ -1,4 +1,6 @@
-import gtk, rox
+import gtk
+
+import rox
 from rox import processes
 
 

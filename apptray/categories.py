@@ -1,5 +1,6 @@
 from apptray.category import Category
 
+
 CATEGORY_NETWORK = Category(
     10, "Network", _("Network"), ['applications-internet']
 )

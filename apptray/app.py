@@ -1,9 +1,11 @@
 import gtk
-import apptray.categories
+
 from rox import processes
 
 from traylib import *
 from traylib.pixbuf_helper import scale_pixbuf_to_size
+
+import apptray.categories
 
 
 default_icon_names = [

@@ -1,4 +1,5 @@
-import gtk, rox, os
+import gtk
+
 from traylib import ICON_THEME
 
 

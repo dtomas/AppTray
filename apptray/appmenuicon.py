@@ -1,6 +1,9 @@
-import sys, os, gtk, gobject, rox
-from rox.tasks import Task
 from operator import attrgetter
+
+import gtk
+
+from rox.tasks import Task
+
 from traylib import *
 from traylib.icon import Icon
 

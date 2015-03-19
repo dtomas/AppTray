@@ -18,6 +18,7 @@ class AppIcon(Icon):
         self.update_tooltip()
         self.update_icon()
         self.update_visibility()
+        self.update_is_drop_target()
 
     def __drag_data_get(self, widget, context, data, info, time):
         data.set_uris([self.__app.dnd_path])
@@ -33,3 +34,9 @@ class AppIcon(Icon):
 
     def click(self, time):
         self.__app.run()
+
+    def make_is_drop_target(self):
+        return True
+
+    def uris_dropped(self, uris, action):
+        self.__app.run_with_uris(uris)

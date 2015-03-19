@@ -1,7 +1,10 @@
 import os
 import xml.etree.ElementTree as ET 
+import urllib
 
-from apptray.app import App
+from rox import processes
+
+from apptray.app import App, uris2paths
 
 
 class NotAnAppDir(Exception):
@@ -69,3 +72,8 @@ class RoxApp(App):
         if not self.__help_dir:
             return ()
         return ('rox', self.__help_dir)
+
+    def run_with_uris(self, uris):
+        processes.PipeThroughCommand(
+            [self.__app_run] + uris2paths(uris), None, None
+        ).start()

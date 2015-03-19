@@ -1,4 +1,6 @@
 import gtk
+import urlparse
+import urllib
 
 from rox import processes
 
@@ -24,6 +26,16 @@ for icon_name in default_icon_names:
         except:
             continue
         break
+
+
+def uris2paths(uris):
+    paths = []
+    for uri in uris:
+        url = urlparse.urlparse(uri)
+        if url.scheme != 'file':
+            continue
+        paths.append(os.path.expanduser(urllib.url2pathname(url.path)))
+    return paths
 
 
 class App:
@@ -81,6 +93,9 @@ class App:
     
     def get_mime_types(self):
         return ()
+
+    def run_with_uris(self, uris):
+        pass
 
     def run(self):
         processes.PipeThroughCommand(self.command, None, None).start()

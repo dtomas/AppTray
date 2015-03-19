@@ -4,13 +4,13 @@ from ConfigParser import RawConfigParser, NoOptionError
 
 import gtk
 
-from rox import i18n
+from rox import i18n, processes
 from rox.basedir import xdg_data_dirs
 
 from traylib import *
 
 from apptray import categories
-from apptray.app import App
+from apptray.app import App, uris2paths
 
 
 class DesktopEntryNotShown(Exception):
@@ -236,6 +236,23 @@ class XdgApp(App):
     
     def get_mime_types(self):
         return self.__mime_types
+
+    def run_with_uris(self, uris):
+        if '%U' in self.__exe:
+            commands = [self.__exe.replace('%U', ' '.join(uris))]
+        elif '%u' in self.__exe:
+            commands = [self.__exe.replace('%u', uri) for uri in uris]
+        elif '%F' in self.__exe:
+            commands = [self.__exe.replace('%F', ' '.join(uris2paths(uris)))]
+        elif '%f' in self.__exe:
+            commands = [
+                self.__exe.replace('%f', path) for path in uris2paths(uris)
+            ]
+        else:
+            commands = [self.__command] + uris2paths(uris)
+        for command in commands:
+            processes.PipeThroughCommand(self.command, None, None).start()
+
 
     exe = property(lambda self : self.__exe)
     path = property(lambda self : self.__path)

@@ -1,7 +1,9 @@
 import os
-from rox import processes, file_monitor
 from cStringIO import StringIO
-from traylib import XDG_DATA_DIRS
+
+from rox import processes, file_monitor
+from rox.basedir import xdg_data_dirs
+
 from apptray.app_handler import AppHandler
 from apptray.handlers.xdg.xdg_app import XdgApp, DesktopEntryNotShown
 
@@ -17,7 +19,7 @@ class XdgAppHandler(AppHandler):
         if not file_monitor.is_available():
             return
 
-        for datadir in XDG_DATA_DIRS:
+        for datadir in xdg_data_dirs:
             apps_dir = os.path.join(datadir, 'applications')
             if not os.path.isdir(apps_dir):
                 continue
@@ -57,7 +59,7 @@ class XdgAppHandler(AppHandler):
             # check if the old app overrides the new one
             new_app_datadir = os.path.dirname(dir)
             old_app_datadir = os.path.dirname(os.path.dirname(old_app.path))
-            for datadir in XDG_DATA_DIRS:
+            for datadir in xdg_data_dirs:
                 if datadir == new_app_datadir:
                     # the datadir of the new app overrules the one
                     # of the old one, so go on
@@ -86,7 +88,7 @@ class XdgAppHandler(AppHandler):
         old_app.destroy()
         
         # look if the app is installed somewhere else
-        for datadir in XDG_DATA_DIRS:
+        for datadir in xdg_data_dirs:
             apps_dir = os.path.join(datadir, 'applications')
             path = os.path.join(apps_dir, leaf)
             if not os.path.exists(path) or os.path.isdir(path):

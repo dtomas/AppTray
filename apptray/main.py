@@ -72,16 +72,11 @@ class AppTray(Tray):
             self.remove_box("search-result")
         self.add_box("search-result", side=self.tray_config.menus)
 
-    def get_custom_menu_items(self):
-        menu_item = gtk.ImageMenuItem(gtk.STOCK_REFRESH)
-        menu_item.connect("activate", self.__refresh)
-        return [menu_item]
-
-    def __refresh(self, menu_item):
+    def refresh(self):
         for category in categories:
-            icon = self.get_icon(category.id)
+            icon = self.tray.get_icon(category.id)
             icon.remove_apps()
-        for handler in self.__handlers:
+        for handler in self.tray.handlers:
             Task(handler.add_apps())
 
     def add_app(self, app, is_new = True):

@@ -27,6 +27,11 @@ class MainIcon(MenuIcon):
         #s += _("Right click will open the AppTray menu.")
         return '\n'.join(parts)
 
+    def get_custom_menu_items(self):
+        menu_item = gtk.ImageMenuItem(gtk.STOCK_REFRESH)
+        menu_item.connect("activate", lambda menu_item: self.tray.refresh)
+        return [menu_item]
+
     def click(self, time):
         if self.__search_dialog is None:
             self.__search_dialog = AppSearchDialog(

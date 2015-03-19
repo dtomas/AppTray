@@ -4,6 +4,7 @@
 
 0.3.0 (unreleased)
 ~~~~~
+- Add install script for XFCE.
 - Now using TrayLib 0.5.
 - Add support for ROX app dirs.
 - New application search dialog.

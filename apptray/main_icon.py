@@ -8,6 +8,10 @@ from apptray.search import AppSearchDialog
 class MainIcon(MenuIcon):
     __search_dialog = None
 
+    def __init__(self, tray, icon_config, tray_config, search_index):
+        MenuIcon.__init__(self, tray, icon_config, tray_config)
+        self.__search_index = search_index
+
     def get_icon_names(self):
         return ["system-installer"]
 
@@ -29,7 +33,7 @@ class MainIcon(MenuIcon):
 
     def get_custom_menu_items(self):
         menu_item = gtk.ImageMenuItem(gtk.STOCK_REFRESH)
-        menu_item.connect("activate", lambda menu_item: self.tray.refresh)
+        menu_item.connect("activate", lambda menu_item: self.tray.refresh())
         return [menu_item]
 
     def click(self, time):
@@ -43,6 +47,7 @@ class MainIcon(MenuIcon):
                     pos_func=self.tray.icon_config.pos_func,
                     hidden=False,
                 ),
+                self.__search_index,
             )
 
             def unrealized(search_dialog):

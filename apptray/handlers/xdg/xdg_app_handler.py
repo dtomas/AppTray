@@ -10,9 +10,8 @@ from apptray.handlers.xdg.xdg_app import XdgApp, DesktopEntryNotShown
 
 class XdgAppHandler(AppHandler):
     
-    def __init__(self, app_added, app_removed):
-        self.__app_added = app_added
-        self.__app_removed = app_removed
+    def __init__(self):
+        AppHandler.__init__(self)
 
         self.__apps_dirs = []
 
@@ -26,7 +25,7 @@ class XdgAppHandler(AppHandler):
             file_monitor.watch(apps_dir, self.file_created, self.file_deleted)
             self.__apps_dirs.append(apps_dir)
 
-    def __iter__(self):
+    def init_apps(self):
         self.__desktop_files = {}
         
         for apps_dir in self.__apps_dirs:
@@ -70,11 +69,11 @@ class XdgAppHandler(AppHandler):
                     return
             
             # remove the old app
-            self.__app_removed(old_app)
+            self.emit("app-removed", old_app)
             old_app.destroy()
 
         # add the new app
-        self.__app_added(new_app, not old_app)
+        self.emit("app-added", new_app, not old_app)
         
         self.__desktop_files[leaf] = new_app
 
@@ -99,7 +98,7 @@ class XdgAppHandler(AppHandler):
             except DesktopEntryNotShown:
                 continue
             # add the new app
-            category_icon = self.__app_added(new_app)
+            category_icon = self.emit("app-added", new_app, True)
             self.__desktop_files[leaf] = new_app
 
     def uninstall(self, app):

@@ -37,6 +37,9 @@ class AppSearchIndex(object):
             'DELETE FROM apps WHERE hash = ?', app_hash
         )
 
+    def clear(self):
+        self.__conn.execute('DELETE FROM apps')
+
     def search(self, keywords, on_result, on_finish):
         c = self.__conn.cursor()
         parts = ['SELECT hash FROM apps WHERE']
@@ -57,12 +60,10 @@ class AppSearchIndex(object):
 
 class AppSearchDialog(gtk.Window):
 
-    def __init__(self, tray, icon_config):
+    def __init__(self, tray, icon_config, search_index):
         gtk.Window.__init__(self)
 
         self.__tray = tray
-
-        self.__search_index = tray.search_index
 
         box = gtk.HBox()
         self.add(box)
@@ -105,7 +106,7 @@ class AppSearchDialog(gtk.Window):
                     tray.remove_icon(app)
                 state.prev_results = results
 
-            self.__search_index.search(
+            search_index.search(
                 entry.get_text().split(),
                 on_result=on_result, on_finish=on_finish
             )

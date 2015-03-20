@@ -10,10 +10,8 @@ from apptray.handlers.rox.rox_app import RoxApp, NotAnAppDir
 
 class RoxAppHandler(AppHandler):
 
-    def __init__(self, app_added, app_removed):
-        self.__app_added = app_added
-        self.__app_removed = app_removed
-
+    def __init__(self):
+        AppHandler.__init__(self)
         self.__apps = {}
 
     def _monitor_apps_dir(self, apps_dir):
@@ -46,7 +44,7 @@ class RoxAppHandler(AppHandler):
                     app_path, self.file_created, self.file_deleted
                 )
 
-    def __iter__(self):
+    def init_apps(self):
         for apps_dir in APPDIRPATH:
             if not os.path.isdir(apps_dir):
                 continue
@@ -75,7 +73,7 @@ class RoxAppHandler(AppHandler):
             pass
         else:
             self.__apps[path] = app
-            self.__app_added(app)
+            self.emit("app-added", app)
         file_monitor.watch(path, self.file_created, self.file_deleted)
 
     def file_deleted(self, dir, leaf):
@@ -89,4 +87,4 @@ class RoxAppHandler(AppHandler):
             app = self.__apps[path]
         except KeyError:
             return
-        self.__app_removed(app)
+        self.emit("app-removed", app)

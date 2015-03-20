@@ -80,7 +80,7 @@ def get(*category_ids):
         return CATEGORY_SCIENCE
     if "Game" in category_ids:
         return CATEGORY_GAME
-    if set(["System", "Settings"]).intersection(category_ids):
+    if "System" in category_ids and "Settings" in category_ids:
         return CATEGORY_SETTINGS_SYSTEM
     if "HardwareSettings" in category_ids:
         return CATEGORY_SETTINGS_SYSTEM

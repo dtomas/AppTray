@@ -34,7 +34,7 @@ class AppSearchIndex(object):
         app_hash = hash(app)
         del self.__apps[app_hash]
         self.__conn.execute(
-            'DELETE FROM apps WHERE hash = ?', app_hash
+            'DELETE FROM apps WHERE hash = ?', (app_hash,)
         )
 
     def clear(self):

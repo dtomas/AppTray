@@ -4,7 +4,7 @@ import urllib
 
 from rox import processes
 
-from traylib import *
+from traylib import ICON_THEME
 from traylib.pixbuf_helper import scale_pixbuf_to_size
 
 import apptray.categories

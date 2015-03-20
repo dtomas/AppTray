@@ -73,7 +73,7 @@ class RoxAppHandler(AppHandler):
             pass
         else:
             self.__apps[path] = app
-            self.emit("app-added", app)
+            self.emit("app-added", app, True)
         file_monitor.watch(path, self.file_created, self.file_deleted)
 
     def file_deleted(self, dir, leaf):
@@ -81,8 +81,6 @@ class RoxAppHandler(AppHandler):
         if leaf == 'AppRun':
             # An app dir is turned into a regular dir.
             path = dir
-        elif not os.path.isdir(path):
-            return
         try:
             app = self.__apps[path]
         except KeyError:

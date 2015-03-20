@@ -20,11 +20,11 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
     tray_config.add_configurable(tray_configurable)
     tray_configurable.update_option_menus()
 
-    def app_added(app, is_new=True):
+    def app_added(manager, app, is_new=True):
         tray.get_icon(app.category).add_app(app, is_new)
         search_index.add_app(app)
 
-    def app_removed(app):
+    def app_removed(manager, app):
         tray.get_icon(app.category).remove_app(app)
         search_index.remove_app(app)
 
@@ -38,7 +38,7 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
             yield None
 
         for app in app_manager.init_apps():
-            app_added(app, False)
+            app_added(app_manager, app, False)
             yield None
 
         for icon in tray.icons:

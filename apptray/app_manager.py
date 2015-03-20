@@ -9,6 +9,16 @@ class AppManager(AppHandler):
         self.__handlers = [
             handler_class() for handler_class in handler_classes
         ]
+        for handler in self.__handlers:
+            handler.connect(
+                "app-added",
+                lambda handler, app, is_new:
+                    self.emit("app-added", app, is_new)
+            )
+            handler.connect(
+                "app-removed",
+                lambda handler, app: self.emit("app-removed", app)
+            )
 
     def init_apps(self):
         for handler in self.__handlers:

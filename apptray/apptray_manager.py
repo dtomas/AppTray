@@ -9,16 +9,13 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
 
     tray.add_box("Categories")
 
-    class TrayConfigurable(object):
+    class handlers:
+        pass
 
-        def update_option_menus(self):
-            if tray.has_box("search-result"):
-                tray.remove_box("search-result")
-            tray.add_box("search-result", side=tray_config.menus)
-
-    tray_configurable = TrayConfigurable()
-    tray_config.add_configurable(tray_configurable)
-    tray_configurable.update_option_menus()
+    def menus_changed():
+        if tray.has_box("search-result"):
+            tray.remove_box("search-result")
+        tray.add_box("search-result", side=tray_config.menus)
 
     def app_added(manager, app, is_new=True):
         tray.get_icon(app.category).add_app(app, is_new)
@@ -28,10 +25,14 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
         tray.get_icon(app.category).remove_app(app)
         search_index.remove_app(app)
 
-    app_added_handler = app_manager.connect("app-added", app_added)
-    app_removed_handler = app_manager.connect("app-removed", app_removed)
-
     def manage():
+        handlers.menus_changed_handler = tray_config.connect("menus-changed",
+                                                             menus_changed)
+        handlers.app_added_handler = app_manager.connect("app-added",
+                                                         app_added)
+        handlers.app_removed_handler = app_manager.connect("app-removed",
+                                                           app_removed)
+
         for category in categories:
             category_icon = AppMenuIcon(icon_config, category)
             tray.add_icon("Categories", category.id, category_icon)
@@ -50,8 +51,9 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
             yield None
 
     def unmanage():
-        app_manager.disconnect(app_added_handler)
-        app_manager.disconnect(app_removed_handler)
+        app_manager.disconnect(handlers.app_added_handler)
+        app_manager.disconnect(handlers.app_removed_handler)
+        tray_config.disconnect(handlers.menus_changed_handler)
         for category in categories:
             tray.remove_icon(category.id)
             yield None

@@ -13,9 +13,10 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
         pass
 
     def menus_changed():
-        if tray.has_box("search-result"):
-            tray.remove_box("search-result")
+        tray.remove_box("search-result")
         tray.add_box("search-result", side=tray_config.menus)
+
+    tray.add_box("search-result", side=tray_config.menus)
 
     def app_added(manager, app, is_new=True):
         tray.get_icon(app.category).add_app(app, is_new)

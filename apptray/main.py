@@ -45,5 +45,8 @@ class AppTray(ManagedTray):
                     search_index=search_index,
                 ),
             ],
-            create_menu_icon=partial(MainIcon, search_index=search_index),
+            create_menu_icon=partial(
+                MainIcon,
+                search_index=search_index,
+            ),
         )

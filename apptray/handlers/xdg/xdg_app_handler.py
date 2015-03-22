@@ -22,7 +22,11 @@ class XdgAppHandler(AppHandler):
             apps_dir = os.path.join(datadir, 'applications')
             if not os.path.isdir(apps_dir):
                 continue
-            file_monitor.watch(apps_dir, self.file_created, self.file_deleted)
+            file_monitor.watch(
+                apps_dir,
+                on_child_created=self.file_created,
+                on_child_deleted=self.file_deleted,
+            )
             self.__apps_dirs.append(apps_dir)
 
     def init_apps(self):

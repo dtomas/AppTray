@@ -1,4 +1,5 @@
-from traylib import *
+import gtk
+
 from traylib.menu_icon import MenuIcon
 from traylib.icon_config import IconConfig
 

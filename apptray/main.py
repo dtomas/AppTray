@@ -4,7 +4,6 @@ from operator import attrgetter
 
 from rox.tasks import Task
 
-from traylib import *
 from traylib.tray import Tray, TrayConfig
 from traylib.icon import IconConfig
 from traylib.managed_tray import ManagedTray

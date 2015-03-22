@@ -4,7 +4,6 @@ import gtk
 
 from rox.tasks import Task
 
-from traylib import *
 from traylib.icon import Icon
 
 from apptray.app import App

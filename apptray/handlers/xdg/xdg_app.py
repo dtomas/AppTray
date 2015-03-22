@@ -7,7 +7,7 @@ import gtk
 from rox import i18n, processes
 from rox.basedir import xdg_data_dirs
 
-from traylib import *
+from traylib import ICON_THEME
 
 from apptray import categories
 from apptray.app import App, uris2paths

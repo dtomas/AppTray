@@ -1,4 +1,6 @@
-from traylib import *
+import gtk
+
+from traylib import TARGET_URI_LIST
 from traylib.icon import Icon
 
 

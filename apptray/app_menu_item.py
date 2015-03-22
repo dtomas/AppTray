@@ -2,8 +2,8 @@ import gtk
 
 from rox.tasks import Task
 
-from traylib import *
-from traylib.pixbuf_helper import *
+from traylib import TOOLTIPS, TARGET_URI_LIST
+from traylib.pixbuf_helper import scale_pixbuf_to_size
 
 from apptray.app_menu import AppMenu
 

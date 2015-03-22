@@ -2,13 +2,12 @@
 			Shows installed applications
 			by Dennis Tomas
 
-0.3 (unreleased)
+0.3
 ~~~
 - Add install script for XFCE.
 - Now using TrayLib 0.5.
 - Add support for ROX app dirs.
 - New application search dialog.
-- Install RunActions.
 
 0.2.3
 ~~~~~

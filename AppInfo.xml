@@ -3,7 +3,7 @@
   <Summary>Shows installed applications</Summary>
   <About>
     <Purpose>Shows installed applications</Purpose>
-    <Version>0.3</Version>
+    <Version>0.3.1</Version>
     <Author>Dennis Tomas &lt;den.t@gmx.de&gt;</Author>
     <Homepage>https://github.com/dtomas/AppTray</Homepage>
   </About>

@@ -24,7 +24,7 @@ class RoxApp(App):
             raise NotAnAppDir(app_dir)
 
         self.__dir_icon = os.path.join(app_dir, ".DirIcon")
-        if not os.access(self.__app_dir, os.R_OK):
+        if not os.access(self.__dir_icon, os.R_OK):
             self.__dir_icon = None
 
         self.__help_dir = os.path.join(app_dir, "Help")
@@ -35,7 +35,7 @@ class RoxApp(App):
         self.__mime_types = []
 
         self.__app_info = os.path.join(app_dir, "AppInfo.xml")
-        if os.access(self.__app_dir, os.R_OK):
+        if os.access(self.__app_info, os.R_OK):
             tree = ET.parse(self.__app_info)
 
             elem = tree.find("Summary")

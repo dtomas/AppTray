@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AppTray 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-15 21:55+CET\n"
+"POT-Creation-Date: 2015-03-21 10:39+CET\n"
 "PO-Revision-Date: 2008-01-19 23:19+0200\n"
 "Last-Translator: Dennis Tomas <dtomas@users.berlios.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,73 +17,77 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apptray/app_menu.py:15
+#: apptray/app_menu.py:17
 msgid "Versions"
 msgstr "Versionen"
 
-#: apptray/categories.py:3
+#: apptray/categories.py:5
 msgid "Network"
 msgstr "Netzwerk"
 
-#: apptray/categories.py:4
+#: apptray/categories.py:8
 msgid "Office"
 msgstr "Büro"
 
-#: apptray/categories.py:5
+#: apptray/categories.py:11
 msgid "Multimedia"
 msgstr ""
 
-#: apptray/categories.py:8
+#: apptray/categories.py:16
 msgid "Graphics"
 msgstr "Grafik"
 
-#: apptray/categories.py:9
+#: apptray/categories.py:19
 msgid "Development"
 msgstr "Entwicklung"
 
-#: apptray/categories.py:10
+#: apptray/categories.py:22
 msgid "Science"
 msgstr "Bildung"
 
-#: apptray/categories.py:11
+#: apptray/categories.py:25
 msgid "Games"
 msgstr "Spiele"
 
-#: apptray/categories.py:12
+#: apptray/categories.py:28
 msgid "Utilities"
 msgstr "Werkzeuge"
 
-#: apptray/categories.py:13
+#: apptray/categories.py:31
 msgid "Other"
 msgstr "Sonstiges"
 
-#: apptray/categories.py:14
+#: apptray/categories.py:34
 msgid "Desktop Settings"
 msgstr "Arbeitsplatz-Einstellungen"
 
-#: apptray/categories.py:15
+#: apptray/categories.py:37
 msgid "System Settings"
 msgstr "System-Einstellungen"
 
-#: apptray/categories.py:16
+#: apptray/categories.py:40
 msgid "System"
 msgstr ""
 
-#: apptray/categories.py:17
+#: apptray/categories.py:43
 msgid "Applets"
 msgstr ""
 
-#: apptray/main_icon.py:20
+#: apptray/main_icon.py:24
 msgid "Scroll up to show application menus."
 msgstr "Aufwärts rollen, um Programm-Menüs anzuzeigen."
 
-#: apptray/main_icon.py:22
+#: apptray/main_icon.py:26
 msgid "Scroll down to hide the application menus."
 msgstr "Abwärts rollen, um die Programm-Menüs zu verbergen."
 
-#: apptray/main_icon.py:24
+#: apptray/main_icon.py:28
 msgid "Click to find an application."
 msgstr "Klicken, um nach Programmen zu suchen."
+
+#: apptray/search.py:68
+msgid "Find applications"
+msgstr "Programme suchen"
 
 #: tipsH:1 tipsV:1
 msgid "Behaviour"

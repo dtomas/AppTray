@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-15 21:55+CET\n"
+"POT-Creation-Date: 2015-03-21 10:39+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,72 +15,76 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: apptray/app_menu.py:15
+#: apptray/app_menu.py:17
 msgid "Versions"
 msgstr ""
 
-#: apptray/categories.py:3
+#: apptray/categories.py:5
 msgid "Network"
 msgstr ""
 
-#: apptray/categories.py:4
+#: apptray/categories.py:8
 msgid "Office"
 msgstr ""
 
-#: apptray/categories.py:5
+#: apptray/categories.py:11
 msgid "Multimedia"
 msgstr ""
 
-#: apptray/categories.py:8
+#: apptray/categories.py:16
 msgid "Graphics"
 msgstr ""
 
-#: apptray/categories.py:9
+#: apptray/categories.py:19
 msgid "Development"
 msgstr ""
 
-#: apptray/categories.py:10
+#: apptray/categories.py:22
 msgid "Science"
 msgstr ""
 
-#: apptray/categories.py:11
+#: apptray/categories.py:25
 msgid "Games"
 msgstr ""
 
-#: apptray/categories.py:12
+#: apptray/categories.py:28
 msgid "Utilities"
 msgstr ""
 
-#: apptray/categories.py:13
+#: apptray/categories.py:31
 msgid "Other"
 msgstr ""
 
-#: apptray/categories.py:14
+#: apptray/categories.py:34
 msgid "Desktop Settings"
 msgstr ""
 
-#: apptray/categories.py:15
+#: apptray/categories.py:37
 msgid "System Settings"
 msgstr ""
 
-#: apptray/categories.py:16
+#: apptray/categories.py:40
 msgid "System"
 msgstr ""
 
-#: apptray/categories.py:17
+#: apptray/categories.py:43
 msgid "Applets"
 msgstr ""
 
-#: apptray/main_icon.py:20
+#: apptray/main_icon.py:24
 msgid "Scroll up to show application menus."
 msgstr ""
 
-#: apptray/main_icon.py:22
+#: apptray/main_icon.py:26
 msgid "Scroll down to hide the application menus."
 msgstr ""
 
-#: apptray/main_icon.py:24
+#: apptray/main_icon.py:28
 msgid "Click to find an application."
+msgstr ""
+
+#: apptray/search.py:68
+msgid "Find applications"
 msgstr ""
 
 #: tipsH:1 tipsV:1

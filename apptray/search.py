@@ -39,6 +39,7 @@ class AppSearchIndex(object):
 
     def clear(self):
         self.__conn.execute('DELETE FROM apps')
+        self.__apps.clear()
 
     def search(self, keywords, on_result, on_finish):
         c = self.__conn.cursor()
@@ -65,8 +66,11 @@ class AppSearchDialog(gtk.Window):
 
         self.__tray = tray
 
+        frame = gtk.Frame(_("Find applications"))
+        self.add(frame)
+
         box = gtk.HBox()
-        self.add(box)
+        frame.add(box)
 
         self.__search_entry = gtk.Entry()
 

@@ -86,7 +86,7 @@ class XdgAppHandler(AppHandler):
         if not old_app or os.path.dirname(old_app.path) != dir:
             return
         # remove the app
-        self.__tray.remove_app(old_app)
+        self.emit("app-removed", old_app)
         del self.__desktop_files[leaf]
         old_app.destroy()
         

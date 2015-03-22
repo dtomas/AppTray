@@ -141,7 +141,7 @@ class XdgApp(App):
                     SECTION_DESKTOP_ENTRY, "GenericName"
                 )
             except NoOptionError:
-                raise DesktopEntryNotShown()
+                pass
         if not self.__description:
             self.__description = self.__name
 

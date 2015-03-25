@@ -2,8 +2,6 @@ import gtk
 import urlparse
 import urllib
 
-from rox import processes
-
 from traylib import ICON_THEME
 from traylib.pixbuf_helper import scale_pixbuf_to_size
 
@@ -83,13 +81,13 @@ class App:
         return None
     
     def get_command(self):
-        return ()
-    
-    def get_help_command(self):
-        return ()
-    
-    def get_versions_command(self):
-        return ()
+        return ''
+
+    def has_help(self):
+        return False
+
+    def show_help(self):
+        pass
     
     def get_mime_types(self):
         return ()
@@ -98,7 +96,7 @@ class App:
         pass
 
     def run(self):
-        processes.PipeThroughCommand(self.command, None, None).start()
+        pass
 
     name = property(lambda self : self.get_name())
     description = property(lambda self : self.get_description())
@@ -107,8 +105,8 @@ class App:
     icon_path = property(lambda self : self.get_icon_path())
     icon = property(lambda self : self.get_icon())
     command = property(lambda self : self.get_command())
-    help_command = property(lambda self : self.get_help_command())
-    versions_command = property(lambda self : self.get_versions_command())
+    #help_command = property(lambda self : self.get_help_command())
+    #versions_command = property(lambda self : self.get_versions_command())
     dnd_path = property(lambda self : self.get_dnd_path())
     handler = property(lambda self : self.__handler)
     mime_types = property(lambda self : self.get_mime_types())

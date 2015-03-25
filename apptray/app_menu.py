@@ -10,18 +10,18 @@ class AppMenu(gtk.Menu):
         gtk.Menu.__init__(self)
         self.__app = app
         menu_item = gtk.ImageMenuItem(gtk.STOCK_HELP)
-        menu_item.connect("activate", self.__activate, app.help_command)
+        menu_item.connect("activate", lambda menu_item: app.show_help())
         self.append(menu_item)
-        if not app.help_command:
+        if not app.has_help():
             menu_item.set_sensitive(False)
-        menu_item = gtk.ImageMenuItem(_("Versions"))
-        menu_item.connect("activate", self.__activate, app.versions_command)
-        self.append(menu_item)
-        if not app.versions_command:
-            menu_item.set_sensitive(False)
+        #menu_item = gtk.ImageMenuItem(_("Versions"))
+        #menu_item.connect("activate", self.__activate, app.versions_command)
+        #self.append(menu_item)
+        #if not app.versions_command:
+        #    menu_item.set_sensitive(False)
         self.append(gtk.SeparatorMenuItem())
         menu_item = gtk.ImageMenuItem(gtk.STOCK_EXECUTE)
-        menu_item.connect("activate", self.__activate, app.command)
+        menu_item.connect("activate", lambda menu_item: app.run())
         self.append(menu_item)
         #self.append(gtk.SeparatorMenuItem())
         #menu_item = gtk.ImageMenuItem(gtk.STOCK_DELETE)
@@ -29,9 +29,6 @@ class AppMenu(gtk.Menu):
         #self.append(menu_item)
         #if not hasattr(app.handler, 'uninstall'):
         #    menu_item.set_sensitive(False)
-
-    def __activate(self, menu_item, command, cond_func = None):
-        processes.PipeThroughCommand(command, None, None).start()
 
     def __uninstall(self, menu_item):
         if rox.confirm(

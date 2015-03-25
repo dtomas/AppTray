@@ -4,7 +4,7 @@ from ConfigParser import RawConfigParser, NoOptionError
 
 import gtk
 
-from rox import i18n, processes
+from rox import i18n, processes, filer
 from rox.basedir import xdg_data_dirs
 
 from traylib import ICON_THEME
@@ -223,19 +223,25 @@ class XdgApp(App):
             return self.__icon_name_or_path
         return None
 
-    def get_command(self):
-        return self.__command
+    def has_help(self):
+        return bool(self.__doc_dir)
     
-    def get_help_command(self):
+    def show_help(self):
         if not self.__doc_dir:
-            return ()
-        return ('rox', self.__doc_dir)
+            return
+        filer.rpc.OpenDir(Filename=self.__doc_dir)
 
     def get_dnd_path(self):
         return self.__path
     
     def get_mime_types(self):
         return self.__mime_types
+
+    def get_command(self):
+        return self.__command
+
+    def run(self):
+        filer.rpc.Run(Filename=self.__path)
 
     def run_with_uris(self, uris):
         if '%U' in self.__exe:
@@ -249,9 +255,9 @@ class XdgApp(App):
                 self.__exe.replace('%f', path) for path in uris2paths(uris)
             ]
         else:
-            commands = [self.__command] + uris2paths(uris)
+            commands = [(self.__command, path) for path in uris2paths(uris)]
         for command in commands:
-            processes.PipeThroughCommand(self.command, None, None).start()
+            processes.PipeThroughCommand(command, None, None).start()
 
 
     exe = property(lambda self : self.__exe)

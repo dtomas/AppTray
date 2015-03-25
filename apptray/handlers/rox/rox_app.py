@@ -57,7 +57,10 @@ class RoxApp(App):
         return self.__description
 
     def get_command(self):
-        return [self.__app_run]
+        return self.__app_dir
+
+    def run(self):
+        filer.rpc.Run(Filename=self.__app_dir)
 
     def get_dnd_path(self):
         return self.__app_dir
@@ -67,11 +70,14 @@ class RoxApp(App):
 
     def get_mime_types(self):
         return self.__mime_types
+
+    def has_help(self):
+        return bool(self.__help_dir)
     
-    def get_help_command(self):
+    def show_help(self):
         if not self.__help_dir:
             return ()
-        return ('rox', self.__help_dir)
+        return filer.rpc.OpenDir(Filename=self._help_dir)
 
     def run_with_uris(self, uris):
         processes.PipeThroughCommand(

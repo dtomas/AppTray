@@ -2,7 +2,7 @@ import os
 import xml.etree.ElementTree as ET 
 import urllib
 
-from rox import processes
+from rox import processes, filer
 
 from apptray.app import App, uris2paths
 

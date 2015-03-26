@@ -1,5 +1,3 @@
-from traylib.icon_manager import IconManager
-
 from apptray.categories import categories
 from apptray.appmenuicon import AppMenuIcon
 from apptray.app_manager import AppManager

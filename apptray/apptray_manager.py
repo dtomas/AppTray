@@ -10,7 +10,7 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
     class handlers:
         pass
 
-    def menus_changed():
+    def menus_changed(tray_config):
         tray.remove_box("search-result")
         tray.add_box("search-result", side=tray_config.menus)
 

@@ -2,6 +2,10 @@
 			Shows installed applications
 			by Dennis Tomas
 
+0.3.2 (unreleased)
+~~~~~
+- Now using TrayLib 0.6.
+
 0.3.1
 ~~~~~
 - Fix bug with app dirs without AppInfo.xml

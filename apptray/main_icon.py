@@ -9,8 +9,8 @@ from apptray.search import AppSearchDialog
 class MainIcon(MenuIcon):
     __search_dialog = None
 
-    def __init__(self, tray, icon_config, tray_config, search_index):
-        MenuIcon.__init__(self, tray, icon_config, tray_config)
+    def __init__(self, tray, search_index):
+        MenuIcon.__init__(self, tray)
         self.__search_index = search_index
 
     def get_icon_names(self):

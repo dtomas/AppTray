@@ -7,8 +7,8 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
 
     tray.add_box("Categories")
 
-    class handlers:
-        pass
+    app_manager_handlers = []
+    tray_config_handlers = []
 
     def menus_changed(tray_config):
         tray.remove_box("search-result")
@@ -25,12 +25,15 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
         search_index.remove_app(app)
 
     def manage():
-        handlers.menus_changed_handler = tray_config.connect("menus-changed",
-                                                             menus_changed)
-        handlers.app_added_handler = app_manager.connect("app-added",
-                                                         app_added)
-        handlers.app_removed_handler = app_manager.connect("app-removed",
-                                                           app_removed)
+        tray_config_handlers.append(
+            tray_config.connect("menus-changed", menus_changed)
+        )
+        app_manager_handlers.append(
+            app_manager.connect("app-added", app_added)
+        )
+        app_manager_handlers.append(
+            app_manager.connect("app-removed", app_removed)
+        )
 
         for category in categories:
             category_icon = AppMenuIcon(icon_config, category)
@@ -50,9 +53,10 @@ def manage_apptray(tray, icon_config, tray_config, app_manager, search_index):
             yield None
 
     def unmanage():
-        app_manager.disconnect(handlers.app_added_handler)
-        app_manager.disconnect(handlers.app_removed_handler)
-        tray_config.disconnect(handlers.menus_changed_handler)
+        for handler in app_manager_handlers:
+            app_manager.disconnect(handler)
+        for handler in tray_config_handlers:
+            tray_config.disconnect(handler)
         for category in categories:
             tray.remove_icon(category.id)
             yield None
